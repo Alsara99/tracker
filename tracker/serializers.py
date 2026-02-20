@@ -6,6 +6,7 @@ class HabitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habit
         fields = [
+            "id",
             "place",
             "time",
             "action",
@@ -16,7 +17,12 @@ class HabitSerializer(serializers.ModelSerializer):
             "related_habit",
             "is_pleasant",
         ]
-        read_only_fields = ["user"]  # Поле только для чтения
+        read_only_fields = ["id", "user"]
+
+    def validate(self, attrs):
+        habit = Habit(**attrs)
+        habit.clean()
+        return attrs
 
     def create(self, validated_data):
         validated_data["user"] = self.context["request"].user
