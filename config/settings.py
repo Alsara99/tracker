@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import os
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "tracker",
     "drf_yasg",
     "users",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -154,3 +155,10 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = "users.User"
+
+CELERY_BEAT_SCHEDULE = {
+    'send_message': {
+        'task': 'tracker.tasks.send_message',
+        'schedule': timedelta(minutes=10),
+    },
+}
