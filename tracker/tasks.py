@@ -2,6 +2,7 @@ from celery import shared_task
 import requests
 import os
 import logging
+from .models import Habit
 
 logger = logging.getLogger(__name__)
 
@@ -20,3 +21,12 @@ def send_telegram_message(chat_id, message):
     except requests.exceptions.RequestException as e:
         logger.error(f"Ошибка отправки сообщения: {e}")
         return f"Ошибка отправки: {e}"
+
+
+@shared_task
+def send_message():
+    habits = Habit.objects.all()
+    for habit in habits:
+        chat_id = habit.user.chat_id
+        message = "Напоминание: выполните свои привычки!"
+        send_telegram_message(chat_id, message)
