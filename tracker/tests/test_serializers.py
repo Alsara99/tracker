@@ -1,9 +1,9 @@
 from django.test import TestCase
 from tracker.serializers import HabitSerializer
-from tracker.models import Habit
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
+
 
 class HabitSerializerTest(TestCase):
     def setUp(self):
