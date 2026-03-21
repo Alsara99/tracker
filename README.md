@@ -21,7 +21,7 @@ cp env.example .env
 ```bash
 docker compose up --build
 ```
-После запуска API будет доступен по адресу: **[http://localhost/](http://localhost/)** (через nginx).
+После запуска API будет доступен по адресу: **[http://localhost/](http://localhost/)** (через nginx)
 
 ---
 
