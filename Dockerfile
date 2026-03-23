@@ -14,7 +14,7 @@ COPY requirements.txt .
 
 RUN python -m pip install --upgrade pip \
     && python -m pip install --no-cache-dir -r requirements.txt \
-    && python -m pip install --no-cache-dir --upgrade setuptools \
+    && python -m pip install --no-cache-dir "setuptools<81" \
     && python -c "import pkg_resources; print('pkg_resources OK')"
 
 COPY . .
